@@ -8,6 +8,8 @@
 ;;  \__\__,_|_| |_|\__, |\__,_|\__,_|_| |_|
 ;;                 |___/                   
 
+(add-to-list 'load-path "~/.emacs.d/modes")
+
 (require 'package)
 ;; Add org package
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
@@ -40,15 +42,6 @@
 (load-theme 'minimal-light t)
 ;; Alias for M-x for easier access
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
-
-;; Overwrite default buffer manager to ibuffer
-(require 'ibuffer)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(add-hook 'ibuffer-mode-hook
-	  (lambda ()
-	  ;; Highlight current line
-	  (hl-line-mode)
-	  ))
 
 ;; Kill buffer fast
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
@@ -143,7 +136,7 @@
 (require 'evil)
 (evil-mode 1)
 ;; Still use Emacs as default, C-z to toggle Evil mode
-(setq evil-default-state 'emacs)
+;(setq evil-default-state 'emacs)
 ;; Map j/k to gj/gk
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
@@ -152,15 +145,20 @@
 (define-key evil-visual-state-map (kbd "TAB") 'evil-change-to-previous-state)
 (define-key evil-insert-state-map (kbd "TAB") 'evil-normal-state)
 (define-key evil-replace-state-map (kbd "TAB") 'evil-normal-state)
-; Access org-mode keys directly from Evil's Normal mode
-(define-key evil-normal-state-map (kbd "M-l") 'org-metaright)
-(define-key evil-normal-state-map (kbd "M-h") 'org-metaleft)
-(define-key evil-normal-state-map (kbd "M-k") 'org-metaup)
-(define-key evil-normal-state-map (kbd "M-j") 'org-metadown)
-(define-key evil-normal-state-map (kbd "M-L") 'org-shiftmetaright)
-(define-key evil-normal-state-map (kbd "M-H") 'org-shiftmetaleft)
-(define-key evil-normal-state-map (kbd "M-K") 'org-shiftmetaup)
-(define-key evil-normal-state-map (kbd "M-J") 'org-shiftmetadown)
+
+;; Make Evil work for org mode!
+(require 'evil-org)
+
+;; Overwrite default buffer manager to ibuffer
+(require 'ibuffer)
+;; Start ibuffer in Evil mode, otherwise it goes to Emacs mode
+(evil-set-initial-state 'ibuffer-mode 'normal)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(add-hook 'ibuffer-mode-hook
+	  (lambda ()
+	  ;; Highlight current line
+	  (hl-line-mode)
+	  ))
 
 ;; Startup with dired
 (dired "~")
