@@ -160,5 +160,14 @@
 	  (hl-line-mode)
 	  ))
 
+;; Better fcitx input method integration with Evil mode
+(require 'fcitx)
+;; Toggle fcitx also when enter/exit Insert mode
+(fcitx-evil-turn-on)
+;; Toggle fcitx on common Emacs commands
+(fcitx-M-x-turn-on)
+(fcitx-shell-command-turn-on)
+(fcitx-eval-expression-turn-on)
+
 ;; Startup with dired
 (dired "~")
