@@ -137,12 +137,13 @@ FUN function callback"
   "K" 'org-shiftup
   "L" 'org-shiftright
   "o" '(lambda () (interactive) (evil-org-eol-call 'clever-insert-item))
-  "O" '(lambda () (interactive) (evil-org-eol-call 'org-insert-heading))
+  "O" '(lambda () (interactive) (evil-org-eol-call 'org-insert-heading-respect-content))
   "$" 'org-end-of-line
   "^" 'org-beginning-of-line
   "<" 'org-metaleft
   ">" 'org-metaright
   "-" 'org-cycle-list-bullet
+  "`" 'org-cycle
   (kbd "<tab>") 'org-cycle)
 
 ;; leader maps
@@ -157,6 +158,8 @@ FUN function callback"
 ;; normal & insert state shortcuts.
 (mapc (lambda (state)
         (evil-define-key state evil-org-mode-map
+          ;; use Tab as escape
+          (kbd "<tab>") 'evil-normal-state
           (kbd "M-l") 'org-metaright
           (kbd "M-h") 'org-metaleft
           (kbd "M-k") 'org-metaup
