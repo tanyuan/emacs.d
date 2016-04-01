@@ -127,6 +127,9 @@
         ("i" "Idea" entry (file+headline org-default-notes-file "Ideas")
              "* %?  %i\n  %T")))
 
+;; Org: drag and drop images to org mode
+(require 'org-download)
+
 ;; Enable PDF Tools
 (pdf-tools-install)
 (add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
