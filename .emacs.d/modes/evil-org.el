@@ -132,10 +132,10 @@ FUN function callback"
   "gl" 'outline-next-visible-heading
   "t" 'org-todo
   "T" '(lambda () (interactive) (evil-org-eol-call (lambda() (org-insert-todo-heading nil))))
-  "H" 'org-shiftleft
-  "J" 'org-shiftdown
-  "K" 'org-shiftup
-  "L" 'org-shiftright
+;  "H" 'org-shiftleft
+;  "J" 'org-shiftdown
+;  "K" 'org-shiftup
+;  "L" 'org-shiftright
   "o" '(lambda () (interactive) (evil-org-eol-call 'clever-insert-item))
   "O" '(lambda () (interactive) (evil-org-eol-call 'org-insert-heading-respect-content))
   "$" 'org-end-of-line
