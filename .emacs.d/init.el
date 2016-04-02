@@ -62,6 +62,10 @@
 (setq save-place-file "~/.emacs.d/saved-places")
 (setq save-place-forget-unreadable-files nil)
 
+;; “smooth scrolling” and “in-place scrolling”
+(require 'smooth-scrolling)
+(smooth-scrolling-mode 1)
+
 ;; Enable Nyan Mode in the mode line
 (require 'nyan-mode)
 (nyan-mode 1)
@@ -108,7 +112,8 @@
 (global-set-key (kbd "C-c g") 'magit-status)
 
 (require 'org)
-;(require 'org-mouse)
+;; Org: drag and drop images to org mode
+(require 'org-download)
 (setq org-modules '(org-mouse))
 (setq org-startup-indented t)
 (add-hook 'org-mode-hook
@@ -117,7 +122,13 @@
 	  (local-set-key (kbd "C-c w") 'widen)
 	  (local-set-key (kbd "C-c b") 'org-tree-to-indirect-buffer)
 	  (local-set-key (kbd "C-c i") 'org-toggle-inline-images)
+	  (local-set-key (kbd "C-c s") 'org-download-screenshot)
+	  (local-set-key (kbd "C-c y") 'org-download-yank)
+	  (local-set-key (kbd "C-c d") 'org-download-delete)
           ))
+;; Org set image size if not specified
+;;   #+ATTR_ORG: :width 100
+(setq org-image-actual-width '(480))
 ;; Org capture (jot down notes quickly)
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-default-notes-file "~/org/capture.org")
@@ -126,9 +137,6 @@
              "* TODO %?  %i\n  %T")
         ("i" "Idea" entry (file+headline org-default-notes-file "Ideas")
              "* %?  %i\n  %T")))
-
-;; Org: drag and drop images to org mode
-(require 'org-download)
 
 ;; Enable PDF Tools
 (pdf-tools-install)
