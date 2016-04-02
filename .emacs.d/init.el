@@ -43,6 +43,10 @@
 ;; Alias for M-x for easier access
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
 
+;; I don't want to use arrow keys
+(global-set-key (kbd "C-x h") 'previous-buffer)
+(global-set-key (kbd "C-x l") 'next-buffer)
+
 ;; Kill buffer fast
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 
