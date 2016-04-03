@@ -30,8 +30,8 @@
 ;; Disable Startup screen
 (setq inhibit-startup-message t) 
 
-;; Hide visual clutters
-(menu-bar-mode -1)
+;; UI 
+(menu-bar-mode t)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (set-fringe-mode 1) ;; diff-hl use the fringe
@@ -66,13 +66,18 @@
 (setq save-place-file "~/.emacs.d/saved-places")
 (setq save-place-forget-unreadable-files nil)
 
-;; “smooth scrolling” and “in-place scrolling”
-(require 'smooth-scrolling)
-(smooth-scrolling-mode 1)
+;; Scroll one line at a time (less "jumpy" than defaults)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
 
 ;; Enable Nyan Mode in the mode line
 (require 'nyan-mode)
 (nyan-mode 1)
+
+;; Display emoji like :smile:
+(global-emojify-mode 1)
 
 ;; Highlight matching  parentheses
 (show-paren-mode 1)
@@ -80,8 +85,8 @@
 ;; Wrap lines by words
 (global-visual-line-mode)
 
-(require 'diff-hl)
 ;; Show git diff status on the fringe
+(require 'diff-hl)
 (global-diff-hl-mode)
 
 ;; Start rainbow-delimiters (color parentheses) in most programming modes
@@ -89,7 +94,6 @@
 
 ;; Dired+: show file details like Dired (should put before loading dired+.el)
 (setq diredp-hide-details-initially-flag nil)
-
 ;; Disable Dired+ terrible colors
 (setq font-lock-maximum-decoration (quote ((dired-mode . 1) (t . t))))
 
@@ -104,16 +108,24 @@
           ;; Hide hidden files in dired, toggle with C-x M-o
           (dired-omit-mode)
           ;; Show git diff status on the fring
-	  (diff-hl-dired-mode)
-	  ))
+          (diff-hl-dired-mode)
+          ))
 (setq dired-omit-files "^\\...+$")
 
-;; View project folders by version control tool
-(projectile-global-mode)
-
-(require 'magit)
 ;; Open git status
+(require 'magit)
 (global-set-key (kbd "C-c g") 'magit-status)
+
+;; org: I use Tab for evil mode so I am unable to trigger <s<Tab> template
+(defun org-insert-src-block ()
+  "Insert source code block in org-mode."
+  (interactive
+  (progn
+    (insert "#+BEGIN_SRC\n")
+    (newline-and-indent)
+    (insert "#+END_SRC\n")
+    (previous-line 2))
+))
 
 (require 'org)
 ;; Org: drag and drop images to org mode
@@ -129,6 +141,7 @@
 	  (local-set-key (kbd "C-c s") 'org-download-screenshot)
 	  (local-set-key (kbd "C-c y") 'org-download-yank)
 	  (local-set-key (kbd "C-c d") 'org-download-delete)
+	  (local-set-key (kbd "C-c a") 'org-insert-src-block)
           ))
 ;; Org set image size if not specified
 ;;   #+ATTR_ORG: :width 100
@@ -163,6 +176,8 @@
 
 ;; Make Evil work for org mode!
 (require 'evil-org)
+;; Make Evil work for magit!
+(require 'evil-magit)
 
 ;; Overwrite default buffer manager to ibuffer
 (require 'ibuffer)
