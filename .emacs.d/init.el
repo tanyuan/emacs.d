@@ -27,12 +27,22 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
-;; Setup English and Chinese font
-(set-frame-font "Source Code Pro")
-(set-fontset-font "fontset-default" 'han '("Source Han Sans TC Medium"))
+;; Save backup files (*~) here instead of sitting beside the file
+(setq backup-directory-alist
+      `((".*" . ,(concat user-emacs-directory "backup"))))
+
+;; Save place
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file (concat user-emacs-directory "saved-places"))
+(setq save-place-forget-unreadable-files nil)
 
 ;; Set window title: Emacs - buffer
 (setq-default frame-title-format '("Emacs - %b"))
+
+;; Setup English and Chinese font
+(set-frame-font "Source Code Pro")
+(set-fontset-font "fontset-default" 'han '("Source Han Sans TC Medium"))
 
 ;; Disable Startup screen
 (setq inhibit-startup-message t) 
@@ -55,16 +65,6 @@
 
 ;; Open default shell
 (global-set-key (kbd "C-x C-t") 'shell)
-
-;; Save backup files (*~) here instead of sitting beside the file
-(setq backup-directory-alist
-      `((".*" . ,(concat user-emacs-directory "backup"))))
-
-;; Save place
-(require 'saveplace)
-(setq-default save-place t)
-(setq save-place-file (concat user-emacs-directory "saved-places"))
-(setq save-place-forget-unreadable-files nil)
 
 ;; Scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -179,6 +179,8 @@
 (define-key evil-insert-state-map (kbd "TAB") 'evil-normal-state)
 (define-key evil-replace-state-map (kbd "TAB") 'evil-normal-state)
 
+;; The following configs try to use J, K as arrow keys as in Evil:
+
 ;; Make Evil work for org mode!
 (require 'evil-org)
 ;; Make Evil work for magit!
@@ -194,6 +196,23 @@
 	  ;; Highlight current line
 	  (hl-line-mode)
 	  ))
+
+;; Package: package-list-packages
+(add-hook 'package-menu-mode-hook
+	  (lambda ()
+	  (hl-line-mode)
+	  (local-set-key (kbd "j") 'next-line)
+	  (local-set-key (kbd "k") 'previous-line)
+          ))
+
+;; Bookmark: list bookmarks
+(global-set-key (kbd "C-x m") 'bookmark-bmenu-list)
+(add-hook 'bookmark-bmenu-mode-hook
+	  (lambda ()
+	  (hl-line-mode)
+	  (local-set-key (kbd "j") 'next-line)
+	  (local-set-key (kbd "k") 'previous-line)
+          ))
 
 ;; Better fcitx input method integration with Evil mode
 (require 'fcitx)
