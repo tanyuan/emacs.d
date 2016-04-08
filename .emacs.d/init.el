@@ -1,6 +1,6 @@
-;; init.el
-;; 
-;; Emacs config file by tanyuan
+;;; init.el --- Emacs config file
+
+;; by tanyuan, 2016
 ;;  _                                      
 ;; | |_ __ _ _ __  _   _ _   _  __ _ _ __  
 ;; | __/ _` | '_ \| | | | | | |/ _` | '_ \ 
@@ -8,7 +8,14 @@
 ;;  \__\__,_|_| |_|\__, |\__,_|\__,_|_| |_|
 ;;                 |___/                   
 
-(add-to-list 'load-path "~/.emacs.d/modes")
+;; Custom files, not installed with package managers
+(add-to-list 'load-path (concat user-emacs-directory "modes"))
+(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
+
+;; Dark theme
+;(load-theme 'minimal t)
+;; Light theme
+(load-theme 'minimal-light t)
 
 (require 'package)
 ;; Add org package
@@ -31,15 +38,11 @@
 (setq inhibit-startup-message t) 
 
 ;; UI 
-(menu-bar-mode t)
+(menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (set-fringe-mode 1) ;; diff-hl use the fringe
 
-;; Dark theme
-;(load-theme 'minimal t)
-;; Light theme
-(load-theme 'minimal-light t)
 ;; Alias for M-x for easier access
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
 
@@ -53,9 +56,6 @@
 ;; Open default shell
 (global-set-key (kbd "C-x C-t") 'shell)
 
-;; Save autosave files (#*#) here instead of sitting beside the file
-(setq auto-save-list-file-prefix
-      (concat user-emacs-directory "auto-save-list/.saves-"))
 ;; Save backup files (*~) here instead of sitting beside the file
 (setq backup-directory-alist
       `((".*" . ,(concat user-emacs-directory "backup"))))
@@ -63,7 +63,7 @@
 ;; Save place
 (require 'saveplace)
 (setq-default save-place t)
-(setq save-place-file "~/.emacs.d/saved-places")
+(setq save-place-file (concat user-emacs-directory "saved-places"))
 (setq save-place-forget-unreadable-files nil)
 
 ;; Scroll one line at a time (less "jumpy" than defaults)
@@ -91,6 +91,8 @@
 
 ;; Start rainbow-delimiters (color parentheses) in most programming modes
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+;; Auto-complete round (), curly {}, square []
+(add-hook 'prog-mode-hook #'paredit-mode)
 
 ;; Dired+: show file details like Dired (should put before loading dired+.el)
 (setq diredp-hide-details-initially-flag nil)

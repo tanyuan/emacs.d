@@ -1,5 +1,13 @@
 ;;; minimal-light-theme.el --- A light/dark minimalistic Emacs 24 theme.
 
+;; modified by tanyuan, 2016
+;;  _                                      
+;; | |_ __ _ _ __  _   _ _   _  __ _ _ __  
+;; | __/ _` | '_ \| | | | | | |/ _` | '_ \ 
+;; | || (_| | | | | |_| | |_| | (_| | | | |
+;;  \__\__,_|_| |_|\__, |\__,_|\__,_|_| |_|
+;;                 |___/                   
+
 ;; Copyright (C) 2014 Anler Hp
 
 ;; Author: Anler Hp <anler86 [at] gmail.com>
