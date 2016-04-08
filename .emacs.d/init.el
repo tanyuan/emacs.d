@@ -145,6 +145,9 @@
 	  (local-set-key (kbd "C-c d") 'org-download-delete)
 	  (local-set-key (kbd "C-c a") 'org-insert-src-block)
           ))
+;; Disable code highlighting so we can have our own background color
+;;   use C-c ' to enter code major mode
+(setq org-src-fontify-natively nil)
 ;; Org set image size if not specified
 ;;   #+ATTR_ORG: :width 100
 (setq org-image-actual-width '(480))
