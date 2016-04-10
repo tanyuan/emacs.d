@@ -147,14 +147,14 @@
      `(org-document-title ((,class (:foreground ,foreground))))
 
      `(org-link ((,class (:background ,org-background :foreground ,foreground :underline t))))
-     `(org-tag ((,class (:background ,org-background :foreground ,foreground))))
+     `(org-tag ((,class (:background ,org-background :foreground ,comment))))
      `(org-warning ((,class (:background ,region :foreground ,foreground :weight bold))))
      `(org-todo ((,class (:background ,region :foreground ,foreground :weight bold))))
      `(org-done ((,class (:background ,region :foreground ,foreground :weight bold))))
 
      `(org-table ((,class (:background ,org-background))))
      `(org-code ((,class (:background ,org-background))))
-     `(org-date ((,class (:background ,org-background :underline t))))
+     `(org-date ((,class (:background ,org-background :foreground ,comment :underline t))))
      `(org-block ((,class (:background ,org-background))))
      `(org-block-background ((,class (:background ,org-background :foreground ,foreground))))
      `(org-block-begin-line
