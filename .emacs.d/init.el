@@ -152,6 +152,7 @@
 ;;   #+ATTR_ORG: :width 100
 (setq org-image-actual-width '(480))
 ;; Org capture (jot down notes quickly)
+(global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-default-notes-file "~/org/capture.org")
 (setq org-capture-templates
@@ -162,8 +163,13 @@
 
 ;; Enable PDF Tools
 (pdf-tools-install)
-(add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
-(add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" . org-pdfview-open))
+;(add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
+;(add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" . org-pdfview-open))
+
+;; Org: Open PDFs in external viewer: evince
+(add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+(add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" . "evince -p %1 %s"))
+
 
 ;; Evil mode (Vim-like key bindings)
 (require 'evil)
