@@ -38,7 +38,7 @@
 (setq save-place-forget-unreadable-files nil)
 
 ;; Set window title: Emacs - buffer
-(setq-default frame-title-format '("Emacs - %b"))
+(setq-default frame-title-format '("Emacs - %b -%m"))
 
 ;; Setup English and Chinese font
 (set-frame-font "Source Code Pro")
@@ -173,11 +173,6 @@
 ;; Map j/k to gj/gk
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-;; Map Tab to Escape
-(define-key evil-normal-state-map (kbd "TAB") 'evil-force-normal-state)
-(define-key evil-visual-state-map (kbd "TAB") 'evil-change-to-previous-state)
-(define-key evil-insert-state-map (kbd "TAB") 'evil-normal-state)
-(define-key evil-replace-state-map (kbd "TAB") 'evil-normal-state)
 
 ;; The following configs try to use J, K as arrow keys as in Evil:
 
