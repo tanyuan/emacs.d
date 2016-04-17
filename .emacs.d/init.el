@@ -12,10 +12,27 @@
 (add-to-list 'load-path (concat user-emacs-directory "modes"))
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
 
-;; Dark theme
-;(load-theme 'minimal t)
-;; Light theme
-(load-theme 'minimal-light t)
+;; Setup themes
+(setq dark-theme 'minimal)
+(setq light-theme 'minimal-light)
+
+;; Default theme
+(setq dark-or-light 'light)
+(load-theme light-theme t)
+
+;; Toggle dark & light themes with shortcut
+(defun toggle-dark-light-theme ()
+  (interactive)
+  (if (eq dark-or-light 'light)
+      (progn
+	(setq dark-or-light 'dark)
+	(load-theme dark-theme t))
+      (progn
+	(setq dark-or-light 'light)
+	(load-theme light-theme t))
+      )
+    )
+(global-set-key (kbd "C-c t") 'toggle-dark-light-theme)
 
 (require 'package)
 ;; Add org package
@@ -52,6 +69,18 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (set-fringe-mode 1) ;; diff-hl use the fringe
+
+;; Wind Move: move between windows
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+(global-set-key (kbd "C-c <left>")  'windmove-left)
+(global-set-key (kbd "C-c <right>") 'windmove-right)
+(global-set-key (kbd "C-c <up>")    'windmove-up)
+(global-set-key (kbd "C-c <down>")  'windmove-down)
+(global-set-key (kbd "C-c h")  'windmove-left)
+(global-set-key (kbd "C-c l") 'windmove-right)
+(global-set-key (kbd "C-c k")    'windmove-up)
+(global-set-key (kbd "C-c j")  'windmove-down)
 
 ;; Alias for M-x for easier access
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)

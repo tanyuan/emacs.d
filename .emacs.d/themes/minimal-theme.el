@@ -48,7 +48,7 @@
        (constant foreground)
        (string "grey70")
        (modeline-foreground background)
-       (modeline-background "grey95")
+       (modeline-background comment)
        (modeline-foreground-inactive comment)
        (modeline-background-inactive background)
        (hl-background region)
