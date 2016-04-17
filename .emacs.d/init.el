@@ -63,6 +63,9 @@
 ;; Kill buffer fast
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
 
+;; Toggle comment a region
+(global-set-key (kbd "C-x ;") 'comment-or-uncomment-region)
+
 ;; Open default shell
 (global-set-key (kbd "C-x C-t") 'shell)
 
@@ -102,7 +105,7 @@
 (require 'dired+)
 (require 'dired-x)
 ;; Human readable size and sort folders first
-(setq dired-listing-switches "-alh --group-directories-first")
+;(setq dired-listing-switches "-alh --group-directories-first")
 (add-hook 'dired-mode-hook
 	  (lambda ()
 	  ;; Highlight current line
@@ -116,7 +119,7 @@
 
 ;; Open git status
 (require 'magit)
-(global-set-key (kbd "C-c g") 'magit-status)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; org: I use Tab for evil mode so I am unable to trigger <s<Tab> template
 (defun org-insert-src-block ()
@@ -144,6 +147,7 @@
 	  (local-set-key (kbd "C-c y") 'org-download-yank)
 	  (local-set-key (kbd "C-c d") 'org-download-delete)
 	  (local-set-key (kbd "C-c a") 'org-insert-src-block)
+	  (local-set-key (kbd "C-c 8") 'org-ctrl-c-star)
           ))
 ;; Disable code highlighting so we can have our own background color
 ;;   use C-c ' to enter code major mode
@@ -160,16 +164,6 @@
              "* TODO %?  %i\n  %T")
         ("i" "Idea" entry (file+headline org-default-notes-file "Ideas")
              "* %?  %i\n  %T")))
-
-;; Enable PDF Tools
-(pdf-tools-install)
-;(add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
-;(add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" . org-pdfview-open))
-
-;; Org: Open PDFs in external viewer: evince
-(add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
-(add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" . "evince -p %1 %s"))
-
 
 ;; Evil mode (Vim-like key bindings)
 (require 'evil)
@@ -194,14 +188,26 @@
 
 ;; Overwrite default buffer manager to ibuffer
 (require 'ibuffer)
-;; Start ibuffer in Evil mode, otherwise it goes to Emacs mode
-(evil-set-initial-state 'ibuffer-mode 'normal)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+(setq ibuffer-default-sorting-mode 'major-mode)
+;; Hide Emacs created buffers that starts with *
+(require 'ibuf-ext)
+(add-to-list 'ibuffer-never-show-predicates "^\\*")
+;; Custom groups
+(setq ibuffer-saved-filter-groups
+	(quote (("default"
+		("Org" (mode . org-mode))  
+		("Dired" (mode . dired-mode))
+		))))
 (add-hook 'ibuffer-mode-hook
 	  (lambda ()
 	  ;; Highlight current line
 	  (hl-line-mode)
+	  ;; Enable custom grouping
+	  (ibuffer-switch-to-saved-filter-groups "default")
 	  ))
+;; Start ibuffer in Evil mode, otherwise it goes to Emacs mode
+(evil-set-initial-state 'ibuffer-mode 'normal)
 
 ;; Package: package-list-packages
 (add-hook 'package-menu-mode-hook
@@ -220,14 +226,34 @@
 	  (local-set-key (kbd "k") 'previous-line)
           ))
 
-;; Better fcitx input method integration with Evil mode
-(require 'fcitx)
-;; Toggle fcitx also when enter/exit Insert mode
-(fcitx-evil-turn-on)
-;; Toggle fcitx on common Emacs commands
-(fcitx-M-x-turn-on)
-(fcitx-shell-command-turn-on)
-(fcitx-eval-expression-turn-on)
+;; For GNU/Linux
+(when (eq system-type 'gnu/linux)
+    ;; Enable PDF Tools
+    (pdf-tools-install)
+    ;(add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
+    ;(add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" . org-pdfview-open))
+
+    ;; Org: Open PDFs in external viewer: evince
+    (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+    (add-to-list 'org-file-apps '("\\.pdf::\\([[:digit:]]+\\)\\'" . "evince -p %1 %s"))
+
+    ;; Better fcitx input method integration with Evil mode
+    (require 'fcitx)
+    ;; Toggle fcitx also when enter/exit Insert mode
+    (fcitx-evil-turn-on)
+    ;; Toggle fcitx on common Emacs commands
+    (fcitx-M-x-turn-on)
+    (fcitx-shell-command-turn-on)
+    (fcitx-eval-expression-turn-on)
+)
+
+;; For Mac OS X
+(when (eq system-type 'darwin)
+    ;; Menu bar blends well on Mac OS X
+    (menu-bar-mode t)
+    ;; default font size (point * 10)
+    (set-face-attribute 'default nil :height 180)
+)
 
 ;; Startup with dired
 (dired "~")
