@@ -73,21 +73,17 @@
 ;; Wind Move: move between windows
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
-(global-set-key (kbd "C-c <left>")  'windmove-left)
-(global-set-key (kbd "C-c <right>") 'windmove-right)
-(global-set-key (kbd "C-c <up>")    'windmove-up)
-(global-set-key (kbd "C-c <down>")  'windmove-down)
-(global-set-key (kbd "C-c h")  'windmove-left)
-(global-set-key (kbd "C-c l") 'windmove-right)
-(global-set-key (kbd "C-c k")    'windmove-up)
-(global-set-key (kbd "C-c j")  'windmove-down)
+(global-set-key (kbd "C-x <left>")  'windmove-left)
+(global-set-key (kbd "C-x <right>") 'windmove-right)
+(global-set-key (kbd "C-x <up>")    'windmove-up)
+(global-set-key (kbd "C-x <down>")  'windmove-down)
+(global-set-key (kbd "C-x h")  'windmove-left)
+(global-set-key (kbd "C-x l") 'windmove-right)
+(global-set-key (kbd "C-x k")    'windmove-up)
+(global-set-key (kbd "C-x j")  'windmove-down)
 
 ;; Alias for M-x for easier access
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
-
-;; I don't want to use arrow keys
-(global-set-key (kbd "C-x h") 'previous-buffer)
-(global-set-key (kbd "C-x l") 'next-buffer)
 
 ;; Kill buffer fast
 (global-set-key (kbd "C-x C-k") 'kill-this-buffer)
