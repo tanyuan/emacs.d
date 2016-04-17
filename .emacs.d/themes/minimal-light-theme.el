@@ -152,6 +152,7 @@
      `(org-todo ((,class (:background ,region :foreground ,foreground :weight bold))))
      `(org-done ((,class (:background ,region :foreground ,foreground :weight bold))))
 
+     `(org-hide ((,class (:background ,background :foreground ,background))))
      `(org-table ((,class (:background ,org-background))))
      `(org-code ((,class (:background ,org-background))))
      `(org-date ((,class (:background ,org-background :foreground ,comment :underline t))))

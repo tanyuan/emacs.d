@@ -40,7 +40,7 @@
        (foreground "grey90")
        (background "grey10")
        (cursor "white")
-       (border "grey10")
+       (border "grey20")
        (minibuffer cursor)
        (region "grey20")
        (comment-delimiter "grey16")
@@ -54,7 +54,7 @@
        (hl-background region)
        (hl-face-background nil)
        (failure "red")
-       (org-background "grey8")
+       (org-background "grey20")
        )
   (setq fci-rule-color comment)
   (custom-theme-set-faces
@@ -152,6 +152,7 @@
      `(org-todo ((,class (:background ,region :foreground ,foreground :weight bold))))
      `(org-done ((,class (:background ,region :foreground ,foreground :weight bold))))
 
+     `(org-hide ((,class (:background ,background :foreground ,background))))
      `(org-table ((,class (:background ,org-background))))
      `(org-code ((,class (:background ,org-background))))
      `(org-date ((,class (:background ,org-background :underline t))))

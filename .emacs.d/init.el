@@ -20,6 +20,9 @@
 (setq dark-or-light 'light)
 (load-theme light-theme t)
 
+;; Emojify: Display emoji like :smile:
+(global-emojify-mode 1)
+
 ;; Toggle dark & light themes with shortcut
 (defun toggle-dark-light-theme ()
   (interactive)
@@ -27,9 +30,15 @@
       (progn
 	(setq dark-or-light 'dark)
 	(load-theme dark-theme t))
+        ;; Restart Emojify to avoid background cache
+        (global-emojify-mode -1)
+        (global-emojify-mode 1)
       (progn
 	(setq dark-or-light 'light)
 	(load-theme light-theme t))
+        ;; Restart Emojify to avoid background cache
+        (global-emojify-mode -1)
+        (global-emojify-mode 1)
       )
     )
 (global-set-key (kbd "C-c t") 'toggle-dark-light-theme)
@@ -55,7 +64,7 @@
 (setq save-place-forget-unreadable-files nil)
 
 ;; Set window title: Emacs - buffer
-(setq-default frame-title-format '("Emacs - %b -%m"))
+(setq-default frame-title-format '("Emacs - %b - %m"))
 
 ;; Setup English and Chinese font
 (set-frame-font "Source Code Pro")
@@ -103,9 +112,6 @@
 ;; Enable Nyan Mode in the mode line
 (require 'nyan-mode)
 (nyan-mode 1)
-
-;; Display emoji like :smile:
-(global-emojify-mode 1)
 
 ;; Highlight matching  parentheses
 (show-paren-mode 1)
