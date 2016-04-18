@@ -23,6 +23,7 @@
   - [[https://github.com/rlister/org-present][Org Present]]: Turn Org into a quick presentation.
 - [[https://magit.vc/][Magit]]: An interface to Git version control.
   - [[https://github.com/justbur/evil-magit][Evil Magit]]: Make Magit work in Evil Mode.
+  - [[https://github.com/pidu/git-timemachine][Git Time Machine]]: See historic versions of the current file.
 - [[https://www.emacswiki.org/emacs/DiredPlus][Dired+]]: Additional functions to default Dired Mode.
 - [[https://github.com/dgutov/diff-hl][Diff Highlight]]: Highlight differences for Dired and files.
 - [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]] =Lisp= : Show different colors for endless parentheses.
