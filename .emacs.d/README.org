@@ -11,6 +11,8 @@
                  |___/                   
 #+END_SRC
 
+[[./screenshot.jpg]]
+
 * Themes
 - [[https://github.com/anler/minimal-theme][Minimal]] (Dark/Light) =modified= : Gray highlighting.
 * Packages
