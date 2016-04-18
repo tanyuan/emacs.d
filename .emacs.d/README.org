@@ -14,7 +14,7 @@
 * Themes
 - [[https://github.com/anler/minimal-theme][Minimal]] (Dark/Light) =modified= : Gray highlighting.
 * Packages
-- [[https://bitbucket.org/lyro/evil/wiki/Home][Evil]]: Extensible VI Layer.
+- [[https://bitbucket.org/lyro/evil/wiki/Home][Evil]]: Extensible VI Layer. Best with [[https://gist.github.com/tanyuan/55bca522bf50363ae4573d4bdcf06e2e][Smart Caps Lock]].
 - [[http://orgmode.org/][Org]]: Your life in plain text.
   - [[https://github.com/edwtjo/evil-org-mode][Evil Org]] =modified= : Make Org work in Evil Mode.
   - [[https://github.com/abo-abo/org-download][Org Download]] =GNU/Linux= : Drag-n-drop images to Org.
