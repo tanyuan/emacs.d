@@ -12,37 +12,6 @@
 (add-to-list 'load-path (concat user-emacs-directory "modes"))
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
 
-;; Setup themes
-(setq dark-theme 'minimal)
-(setq light-theme 'minimal-light)
-
-;; Default theme
-(setq dark-or-light 'light)
-(load-theme light-theme t)
-
-;; Emojify: Display emoji like :smile:
-(global-emojify-mode 1)
-
-;; Toggle dark & light themes with shortcut
-(defun toggle-dark-light-theme ()
-  (interactive)
-  (if (eq dark-or-light 'light)
-      (progn
-	(setq dark-or-light 'dark)
-	(load-theme dark-theme t))
-        ;; Restart Emojify to avoid background cache
-        (global-emojify-mode -1)
-        (global-emojify-mode 1)
-      (progn
-	(setq dark-or-light 'light)
-	(load-theme light-theme t))
-        ;; Restart Emojify to avoid background cache
-        (global-emojify-mode -1)
-        (global-emojify-mode 1)
-      )
-    )
-(global-set-key (kbd "C-c t") 'toggle-dark-light-theme)
-
 (require 'package)
 ;; Add org package
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
@@ -63,6 +32,35 @@
 (setq save-place-file (concat user-emacs-directory "saved-places"))
 (setq save-place-forget-unreadable-files nil)
 
+;; Setup themes
+(setq dark-theme 'minimal)
+(setq light-theme 'minimal-light)
+;; Default theme
+(setq dark-or-light 'light)
+(load-theme light-theme t)
+;; Emojify: Display emoji like :smile:
+(require 'emojify)
+(global-emojify-mode 1)
+;; Toggle dark & light themes with shortcut
+(defun toggle-dark-light-theme ()
+  (interactive)
+  (if (eq dark-or-light 'light)
+      (progn
+	(setq dark-or-light 'dark)
+	(load-theme dark-theme t))
+        ;; Restart Emojify to avoid background cache
+        (global-emojify-mode -1)
+        (global-emojify-mode 1)
+      (progn
+	(setq dark-or-light 'light)
+	(load-theme light-theme t))
+        ;; Restart Emojify to avoid background cache
+        (global-emojify-mode -1)
+        (global-emojify-mode 1)
+      )
+    )
+(global-set-key (kbd "C-c t") 'toggle-dark-light-theme)
+
 ;; Set window title: Emacs - buffer
 (setq-default frame-title-format '("Emacs - %b - %m"))
 
@@ -78,6 +76,19 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (set-fringe-mode 1) ;; diff-hl use the fringe
+;; Mode line
+;; Show columns
+(setq column-number-mode t)
+;; Disable ugly 3D box
+(set-face-attribute 'mode-line-highlight nil :box nil)
+
+;; Enable Nyan Mode in the mode line
+(require 'nyan-mode)
+(nyan-mode 1)
+
+;; Show git diff status on the fringe
+(require 'diff-hl)
+(global-diff-hl-mode)
 
 ;; Wind Move: move between windows
 (when (fboundp 'windmove-default-keybindings)
@@ -100,18 +111,11 @@
 ;; Toggle comment a region
 (global-set-key (kbd "C-x ;") 'comment-or-uncomment-region)
 
-;; Open default shell
-(global-set-key (kbd "C-x C-t") 'shell)
-
 ;; Scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
 (setq scroll-step 1) ;; keyboard scroll one line at a time
-
-;; Enable Nyan Mode in the mode line
-(require 'nyan-mode)
-(nyan-mode 1)
 
 ;; Highlight matching  parentheses
 (show-paren-mode 1)
@@ -119,14 +123,31 @@
 ;; Wrap lines by words
 (global-visual-line-mode)
 
-;; Show git diff status on the fringe
-(require 'diff-hl)
-(global-diff-hl-mode)
-
 ;; Start rainbow-delimiters (color parentheses) in most programming modes
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 ;; Auto-complete round (), curly {}, square []
 (add-hook 'prog-mode-hook #'paredit-mode)
+
+;; Overwrite default buffer manager to ibuffer
+(require 'ibuffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(setq ibuffer-default-sorting-mode 'major-mode)
+;; Hide Emacs created buffers that starts with *
+(require 'ibuf-ext)
+(add-to-list 'ibuffer-never-show-predicates "^\\*")
+;; Custom groups
+(setq ibuffer-saved-filter-groups
+	(quote (("default"
+		("Org" (mode . org-mode))  
+		("Dired" (mode . dired-mode))
+		))))
+(add-hook 'ibuffer-mode-hook
+	  (lambda ()
+	  ;; Highlight current line
+	  (hl-line-mode)
+	  ;; Enable custom grouping
+	  (ibuffer-switch-to-saved-filter-groups "default")
+	  ))
 
 ;; Dired+: show file details like Dired (should put before loading dired+.el)
 (setq diredp-hide-details-initially-flag nil)
@@ -199,41 +220,23 @@
 ;; Evil mode (Vim-like key bindings)
 (require 'evil)
 (evil-mode 1)
+;; Put Evil status tag in front of the mode line
+(setq evil-mode-line-format '(before . mode-line-front-space))
 ;; Still use Emacs as default, C-z to toggle Evil mode
 ;(setq evil-default-state 'emacs)
 ;; Map j/k to gj/gk
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
-;; The following configs try to use J, K as arrow keys as in Evil:
+;; Start ibuffer in Evil mode, otherwise it goes to Emacs mode
+(evil-set-initial-state 'ibuffer-mode 'normal)
 
 ;; Make Evil work for org mode!
 (require 'evil-org)
 ;; Make Evil work for magit!
 (require 'evil-magit)
 
-;; Overwrite default buffer manager to ibuffer
-(require 'ibuffer)
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(setq ibuffer-default-sorting-mode 'major-mode)
-;; Hide Emacs created buffers that starts with *
-(require 'ibuf-ext)
-(add-to-list 'ibuffer-never-show-predicates "^\\*")
-;; Custom groups
-(setq ibuffer-saved-filter-groups
-	(quote (("default"
-		("Org" (mode . org-mode))  
-		("Dired" (mode . dired-mode))
-		))))
-(add-hook 'ibuffer-mode-hook
-	  (lambda ()
-	  ;; Highlight current line
-	  (hl-line-mode)
-	  ;; Enable custom grouping
-	  (ibuffer-switch-to-saved-filter-groups "default")
-	  ))
-;; Start ibuffer in Evil mode, otherwise it goes to Emacs mode
-(evil-set-initial-state 'ibuffer-mode 'normal)
+;; Vimify: try to use J, K as arrow keys as in Evil:
 
 ;; Package: package-list-packages
 (add-hook 'package-menu-mode-hook
