@@ -30,5 +30,6 @@
 - [[http://jblevins.org/projects/markdown-mode/][Markdown]]: Markdown Mode with similar functions as Org Mode.
 - [[https://github.com/politza/pdf-tools][PDF Tools]] =GNU/Linux= : Real PDF viewer using =libpoppler=.
 - [[https://github.com/cute-jumper/fcitx.el][Fcitx]] =Chinese= =GNU/Linux= : Automatically switch Fcitx input method to English when using commands.
+- [[https://github.com/larstvei/Try][Tr]]y: Try packages in temperary directory =/tmp= before really install them.
 - [[https://github.com/TeMPOraL/nyan-mode][Nyan]]: Add Nyan Cat position indicator to Mode Line.
 - [[https://github.com/iqbalansari/emacs-emojify][Emojify]]: Show emojis like :grin: .
