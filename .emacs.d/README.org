@@ -1,0 +1,32 @@
+#+TITLE:  emacs by tanyuan
+#+AUTHOR: tanyuan
+#+DATE:   2016
+
+#+BEGIN_SRC artist
+  _                                         
+ | |_ __ _ _ __  _   _ _   _  __ _ _ __      ___ _ __ ___   __ _  ___ ___  
+ | __/ _` | '_ \| | | | | | |/ _` | '_ \    / _ \ '_ ` _ \ / _` |/ __/ __|
+ | || (_| | | | | |_| | |_| | (_| | | | |  |  __/ | | | | | (_| | (__\__ \
+  \__\__,_|_| |_|\__, |\__,_|\__,_|_| |_|   \___|_| |_| |_|\__,_|\___|___/
+                 |___/                   
+#+END_SRC
+
+* Themes
+- [[https://github.com/anler/minimal-theme][Minimal]] (Dark/Light) =modified= : Gray highlighting.
+* Packages
+- [[https://bitbucket.org/lyro/evil/wiki/Home][Evil]]: Extensible VI Layer.
+- [[http://orgmode.org/][Org]]: Your life in plain text.
+  - [[https://github.com/edwtjo/evil-org-mode][Evil Org]] =modified= : Make Org work in Evil Mode.
+  - [[https://github.com/abo-abo/org-download][Org Download]] =GNU/Linux= : Drag-n-drop images to Org.
+  - [[https://github.com/rlister/org-present][Org Present]]: Turn Org into a quick presentation.
+- [[https://magit.vc/][Magit]]: An interface to Git version control.
+  - [[https://github.com/justbur/evil-magit][Evil Magit]]: Make Magit work in Evil Mode.
+- [[https://www.emacswiki.org/emacs/DiredPlus][Dired+]]: Additional functions to default Dired Mode.
+- [[https://github.com/dgutov/diff-hl][Diff Highlight]]: Highlight differences for Dired and files.
+- [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]] =Lisp= : Show different colors for endless parentheses.
+- [[https://www.emacswiki.org/emacs/ParEdit][Par Edit]] =Lisp= : Automatically add parentheses and keep parentheses balanced.
+- [[http://jblevins.org/projects/markdown-mode/][Markdown]]: Markdown Mode with similar functions as Org Mode.
+- [[https://github.com/politza/pdf-tools][PDF Tools]] =GNU/Linux= : Real PDF viewer using =libpoppler=.
+- [[https://github.com/cute-jumper/fcitx.el][Fcitx]] =Chinese= =GNU/Linux= : Automatically switch Fcitx input method to English when using commands.
+- [[https://github.com/TeMPOraL/nyan-mode][Nyan]]: Add Nyan Cat position indicator to Mode Line.
+- [[https://github.com/iqbalansari/emacs-emojify][Emojify]]: Show emojis like :grin: .
