@@ -14,7 +14,7 @@
 [[./screenshot.jpg]]
 
 * Themes
-- [[https://github.com/anler/minimal-theme][Minimal]] (Dark/Light) =modified= : Gray highlighting.
+- [[https://github.com/tanyuan/minimal-theme][Minimal]] (Dark/Light): Gray highlighting.
 * Packages
 - [[https://bitbucket.org/lyro/evil/wiki/Home][Evil]]: Extensible VI Layer. Best with [[https://gist.github.com/tanyuan/55bca522bf50363ae4573d4bdcf06e2e][Smart Caps Lock]].
 - [[http://orgmode.org/][Org]]: Your life in plain text.

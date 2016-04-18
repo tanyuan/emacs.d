@@ -10,7 +10,7 @@
 
 ;; Custom files, not installed with package managers
 (add-to-list 'load-path (concat user-emacs-directory "modes"))
-(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
+(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/minimal-theme"))
 
 (require 'package)
 ;; Add org package
