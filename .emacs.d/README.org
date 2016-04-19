@@ -17,13 +17,15 @@
 - [[https://github.com/tanyuan/minimal-theme][Minimal]] (Dark/Light): Gray highlighting.
 * Packages
 - [[https://bitbucket.org/lyro/evil/wiki/Home][Evil]]: Extensible VI Layer. Best with [[https://gist.github.com/tanyuan/55bca522bf50363ae4573d4bdcf06e2e][Smart Caps Lock]].
-- [[http://orgmode.org/][Org]]: Your life in plain text.
+- [[http://orgmode.org/][Org]]: Your life in plain text. I did not install =org-plus-contrib= to avoid conflicts with the following.
   - [[https://github.com/edwtjo/evil-org-mode][Evil Org]] =modified= : Make Org work in Evil Mode.
+  - [[http://orgmode.org/w/?p=org-mode.git;a=blob_plain;f=lisp/org-mouse.el;hb=HEAD][Org Mouse]]: Mouse click to fold/unfold headers.
   - [[https://github.com/abo-abo/org-download][Org Download]] =GNU/Linux= : Drag-n-drop images to Org.
   - [[https://github.com/rlister/org-present][Org Present]]: Turn Org into a quick presentation.
 - [[https://magit.vc/][Magit]]: An interface to Git version control.
   - [[https://github.com/justbur/evil-magit][Evil Magit]]: Make Magit work in Evil Mode.
-  - [[https://github.com/pidu/git-timemachine][Git Time Machine]]: See historic versions of the current file.
+- [[https://github.com/pidu/git-timemachine][Git Time Machine]]: See historical versions of the current file.
+- [[https://github.com/defunkt/gist.el][Gist]]: Browse and add gists to GitHub.
 - [[https://www.emacswiki.org/emacs/DiredPlus][Dired+]]: Additional functions to default Dired Mode.
 - [[https://github.com/dgutov/diff-hl][Diff Highlight]]: Highlight differences for Dired and files.
 - [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]] =Lisp= : Show different colors for endless parentheses.

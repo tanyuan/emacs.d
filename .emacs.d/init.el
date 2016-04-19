@@ -185,11 +185,12 @@
 ))
 
 (require 'org)
+;; Org: support mouse to fold/unfold
+(require 'org-mouse)
 ;; Org: drag and drop images to org mode
 (require 'org-download)
 ;; Org: minimal presentation in emacs
 (require 'org-present)
-(setq org-modules '(org-mouse))
 (setq org-startup-indented t)
 (add-hook 'org-mode-hook
 	  (lambda ()
