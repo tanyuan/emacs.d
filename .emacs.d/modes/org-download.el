@@ -4,7 +4,6 @@
 
 ;; Author: Oleh Krehel
 ;; URL: https://github.com/abo-abo/org-download
-;; Package-Version: 20160314.1036
 ;; Version: 0.1.0
 ;; Package-Requires: ((async "1.2"))
 ;; Keywords: images, screenshots, download
@@ -315,12 +314,12 @@ It's inserted before the image link and is used to annotate it.")
         (insert
          (concat
           (funcall org-download-annotate-function link)
-          (format "\n%s[[%s]]"
+          (format "\n%s[[file:%s]]"
                   (if (= org-download-image-width 0)
                       ""
                     (format
                      "#+attr_html: :width %dpx\n" org-download-image-width))
-                  filename)))
+                  (file-relative-name filename (file-name-directory (buffer-name))))))
         (org-display-inline-images)))))
 
 (defun org-download--at-comment-p ()
