@@ -82,6 +82,12 @@
 ;; Disable ugly 3D box
 (set-face-attribute 'mode-line-highlight nil :box nil)
 
+;; Always hightlight current line
+(global-hl-line-mode)
+
+;; Use spaces instead of tabs
+(setq-default indent-tabs-mode nil)
+
 ;; Enable Nyan Mode in the mode line
 (require 'nyan-mode)
 (nyan-mode 1)
@@ -93,14 +99,10 @@
 ;; Wind Move: move between windows
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
-(global-set-key (kbd "C-x <left>")  'windmove-left)
-(global-set-key (kbd "C-x <right>") 'windmove-right)
-(global-set-key (kbd "C-x <up>")    'windmove-up)
-(global-set-key (kbd "C-x <down>")  'windmove-down)
-(global-set-key (kbd "C-x h")  'windmove-left)
+(global-set-key (kbd "C-x h") 'windmove-left)
 (global-set-key (kbd "C-x l") 'windmove-right)
-(global-set-key (kbd "C-x k")    'windmove-up)
-(global-set-key (kbd "C-x j")  'windmove-down)
+(global-set-key (kbd "C-x k") 'windmove-up)
+(global-set-key (kbd "C-x j") 'windmove-down)
 
 ;; Alias for M-x for easier access
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
@@ -136,15 +138,17 @@
 (require 'ibuf-ext)
 (add-to-list 'ibuffer-never-show-predicates "^\\*")
 ;; Custom groups
+(setq ibuffer-show-empty-filter-groups nil)
 (setq ibuffer-saved-filter-groups
 	(quote (("default"
 		("Org" (mode . org-mode))  
+		("Emacs Lisp" (mode . emacs-lisp-mode))  
 		("Dired" (mode . dired-mode))
 		))))
 (add-hook 'ibuffer-mode-hook
 	  (lambda ()
-	  ;; Highlight current line
-	  (hl-line-mode)
+	  ;; Keep buffers up-to-date
+	  (ibuffer-auto-mode 1)
 	  ;; Enable custom grouping
 	  (ibuffer-switch-to-saved-filter-groups "default")
 	  ))
@@ -156,12 +160,11 @@
 
 (require 'dired+)
 (require 'dired-x)
+(setq delete-by-moving-to-trash t)
 ;; Human readable size and sort folders first
-;(setq dired-listing-switches "-alh --group-directories-first")
+(setq dired-listing-switches "-alh --group-directories-first")
 (add-hook 'dired-mode-hook
 	  (lambda ()
-	  ;; Highlight current line
-	  (hl-line-mode)
           ;; Hide hidden files in dired, toggle with C-x M-o
           (dired-omit-mode)
           ;; Show git diff status on the fring
@@ -203,6 +206,7 @@
 	  (local-set-key (kbd "C-c d") 'org-download-delete)
 	  (local-set-key (kbd "C-c a") 'org-insert-src-block)
 	  (local-set-key (kbd "C-c 8") 'org-ctrl-c-star)
+	  (local-set-key (kbd "C-c 4") 'org-archive-subtree)
           ))
 ;; Disable code highlighting so we can have our own background color
 ;;   use C-c ' to enter code major mode
@@ -227,6 +231,8 @@
 (setq evil-mode-line-format '(before . mode-line-front-space))
 ;; Still use Emacs as default, C-z to toggle Evil mode
 ;(setq evil-default-state 'emacs)
+;; Make cursor to bar to differentiate from normal mode
+(setq evil-emacs-state-cursor 'bar)
 ;; Map j/k to gj/gk
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
@@ -244,7 +250,6 @@
 ;; Package: package-list-packages
 (add-hook 'package-menu-mode-hook
 	  (lambda ()
-	  (hl-line-mode)
 	  (local-set-key (kbd "j") 'next-line)
 	  (local-set-key (kbd "k") 'previous-line)
           ))
@@ -253,10 +258,23 @@
 (global-set-key (kbd "C-x m") 'bookmark-bmenu-list)
 (add-hook 'bookmark-bmenu-mode-hook
 	  (lambda ()
-	  (hl-line-mode)
 	  (local-set-key (kbd "j") 'next-line)
 	  (local-set-key (kbd "k") 'previous-line)
           ))
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.xml?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.scss?\\'" . web-mode))
 
 ;; For GNU/Linux
 (when (eq system-type 'gnu/linux)
