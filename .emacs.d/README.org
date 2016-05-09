@@ -15,13 +15,17 @@
 
 * Themes
 - [[https://github.com/tanyuan/minimal-theme][Minimal]] (Dark/Light): Gray highlighting.
-* Packages
-- [[https://bitbucket.org/lyro/evil/wiki/Home][Evil]]: Extensible VI Layer. Best with [[https://gist.github.com/tanyuan/55bca522bf50363ae4573d4bdcf06e2e][Smart Caps Lock]].
+* Modes
 - [[http://orgmode.org/][Org]]: Your life in plain text. I did not install =org-plus-contrib= to avoid conflicts with the following.
   - [[https://github.com/edwtjo/evil-org-mode][Evil Org]] =modified= : Make Org work in Evil Mode.
   - [[http://orgmode.org/w/?p=org-mode.git;a=blob_plain;f=lisp/org-mouse.el;hb=HEAD][Org Mouse]]: Mouse click to fold/unfold headers.
   - [[https://github.com/abo-abo/org-download][Org Download]] =GNU/Linux= : Drag-n-drop images to Org.
   - [[https://github.com/rlister/org-present][Org Present]]: Turn Org into a quick presentation.
+- [[http://jblevins.org/projects/markdown-mode/][Markdown]]: Markdown Mode with similar functions as Org Mode.
+- [[https://github.com/politza/pdf-tools][PDF Tools]] =GNU/Linux= : Real PDF viewer using =libpoppler=.
+- [[http://web-mode.org/][Web Mode]]: Support many state-of-the-art web tools.
+* Packages
+- [[https://bitbucket.org/lyro/evil/wiki/Home][Evil]]: Extensible VI Layer. Best with [[https://gist.github.com/tanyuan/55bca522bf50363ae4573d4bdcf06e2e][Smart Caps Lock]].
 - [[https://magit.vc/][Magit]]: An interface to Git version control.
   - [[https://github.com/justbur/evil-magit][Evil Magit]]: Make Magit work in Evil Mode.
 - [[https://github.com/pidu/git-timemachine][Git Time Machine]]: See historical versions of the current file.
@@ -30,9 +34,12 @@
 - [[https://github.com/dgutov/diff-hl][Diff Highlight]]: Highlight differences for Dired and files.
 - [[https://github.com/Fanael/rainbow-delimiters][Rainbow Delimiters]] =Lisp= : Show different colors for endless parentheses.
 - [[https://www.emacswiki.org/emacs/ParEdit][Par Edit]] =Lisp= : Automatically add parentheses and keep parentheses balanced.
-- [[http://jblevins.org/projects/markdown-mode/][Markdown]]: Markdown Mode with similar functions as Org Mode.
-- [[https://github.com/politza/pdf-tools][PDF Tools]] =GNU/Linux= : Real PDF viewer using =libpoppler=.
+- [[http://www.flycheck.org/en/latest/][Flycheck]]: Underline syntax errors for many languages.
 - [[https://github.com/cute-jumper/fcitx.el][Fcitx]] =Chinese= =GNU/Linux= : Automatically switch Fcitx input method to English when using commands.
-- [[https://github.com/larstvei/Try][Tr]]y: Try packages in temperary directory =/tmp= before really install them.
+- [[https://github.com/larstvei/Try][Try]]: Try packages in temperary directory =/tmp= before really install them.
 - [[https://github.com/TeMPOraL/nyan-mode][Nyan]]: Add Nyan Cat position indicator to Mode Line.
 - [[https://github.com/iqbalansari/emacs-emojify][Emojify]]: Show emojis like :grin: .
+* Resources
+- [[http://emacs.sexy/][Emacs is sexy]]
+- [[https://github.com/emacs-tw/awesome-emacs][Awesome Emacs]]
+- [[https://github.com/emacs-tw/emacs-101][Emacs 101 - 新手求生指南]]
