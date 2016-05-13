@@ -161,8 +161,6 @@
 (require 'dired+)
 (require 'dired-x)
 (setq delete-by-moving-to-trash t)
-;; Human readable size and sort folders first
-(setq dired-listing-switches "-alh --group-directories-first")
 (add-hook 'dired-mode-hook
 	  (lambda ()
           ;; Hide hidden files in dired, toggle with C-x M-o
@@ -278,6 +276,9 @@
 
 ;; For GNU/Linux
 (when (eq system-type 'gnu/linux)
+    ;; Human readable size and sort folders first
+    (setq dired-listing-switches "-alh --group-directories-first")
+
     ;; Enable PDF Tools
     (pdf-tools-install)
     ;(add-to-list 'org-file-apps '("\\.pdf\\'" . org-pdfview-open))
