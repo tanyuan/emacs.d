@@ -41,24 +41,45 @@
 ;; Emojify: Display emoji like :smile:
 (require 'emojify)
 (global-emojify-mode 1)
+
+;; for get-frame-name
+(require 'frame-fns)
+;; Use light theme in GNOME
+(defun set-selected-frame-light ()
+  (interactive)
+  (let ((frame-name (get-frame-name (selected-frame))))
+    (call-process-shell-command (concat "xprop -f _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT \"light\" -name \"" frame-name "\""))))
+;; Use dark theme in GNOME
+(defun set-selected-frame-dark ()
+  (interactive)
+  (let ((frame-name (get-frame-name (selected-frame))))
+    (call-process-shell-command (concat "xprop -f _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT \"dark\" -name \"" frame-name "\""))))
+
+(if (window-system)
+    (set-selected-frame-light))
+
 ;; Toggle dark & light themes with shortcut
 (defun toggle-dark-light-theme ()
   (interactive)
   (if (eq dark-or-light 'light)
       (progn
 	(setq dark-or-light 'dark)
-	(load-theme dark-theme t))
+	(load-theme dark-theme t)
         ;; Restart Emojify to avoid background cache
         (global-emojify-mode -1)
         (global-emojify-mode 1)
+        (if (window-system)
+            (set-selected-frame-dark))
+        )
       (progn
 	(setq dark-or-light 'light)
-	(load-theme light-theme t))
+	(load-theme light-theme t)
         ;; Restart Emojify to avoid background cache
         (global-emojify-mode -1)
         (global-emojify-mode 1)
-      )
-    )
+        (if (window-system)
+            (set-selected-frame-light))
+        )))
 (global-set-key (kbd "C-c t") 'toggle-dark-light-theme)
 
 ;; Set window title: Emacs - buffer
