@@ -11,8 +11,6 @@
                  |___/                   
 #+END_SRC
 
-[[./screenshot.jpg]]
-
 * Themes
 - [[https://github.com/tanyuan/minimal-theme][Minimal]] (Dark/Light): Gray highlighting.
 * Modes
