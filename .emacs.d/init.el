@@ -325,6 +325,8 @@
     (menu-bar-mode t)
     ;; default font size (point * 10)
     (set-face-attribute 'default nil :height 180)
+    ;; Org: Open PDFs on Mac
+    (add-to-list 'org-file-apps '("\\.pdf\\'" . "open %s"))
 )
 
 ;; Startup with dired
