@@ -115,7 +115,6 @@
 
 ;; Show git diff status on the fringe
 (require 'diff-hl)
-(global-diff-hl-mode)
 
 ;; Wind Move: move between windows
 (when (fboundp 'windmove-default-keybindings)
@@ -223,7 +222,7 @@
 	  (local-set-key (kbd "C-c s") 'org-download-screenshot)
 	  (local-set-key (kbd "C-c y") 'org-download-yank)
 	  (local-set-key (kbd "C-c d") 'org-download-delete)
-	  (local-set-key (kbd "C-c a") 'org-insert-src-block)
+	  (local-set-key (kbd "C-c S") 'org-insert-src-block)
 	  (local-set-key (kbd "C-c 8") 'org-ctrl-c-star)
 	  (local-set-key (kbd "C-c 4") 'org-archive-subtree)
           ))
@@ -233,12 +232,15 @@
 ;; Org set image size if not specified
 ;;   #+ATTR_ORG: :width 100
 (setq org-image-actual-width '(480))
+;; Org adgenda
+(global-set-key (kbd "C-c a") 'org-agenda)
+(setq org-agenda-files (list "~/org/"))
 ;; Org capture (jot down notes quickly)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-default-notes-file "~/org/capture.org")
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline org-default-notes-file "Tasks")
+      '(("t" "Todo" entry (file+headline org-default-notes-file "Notes")
              "* TODO %?  %i\n  %T")
         ("i" "Idea" entry (file+headline org-default-notes-file "Ideas")
              "* %?  %i\n  %T")))
